@@ -1,5 +1,7 @@
+#!/usr/bin/python3
 #
-#   raspberry pi epoch counter V0.1
+#   raspberry pi epoch counter V0.1.1
+#   february 6th, 2022
 #   
 #   Will continueously count up from the moment you run it
 #   This is currently only a proof of concept
@@ -12,7 +14,7 @@ import calendar as c
 import time as t
 import os
 
-epoch_time = 0  # current epoch time
+epoch_time = int(t.time())  # current epoch time
 start_time = 0  # when program was first run
 
 # path of the configuration files; default is in the same directory.
@@ -26,8 +28,7 @@ if os.path.exists(epoch_config_path):
         try:
             start_time = int(file.read())
         except:
-            print("Error reading value starting value. \
-Try deleting 'epoch_grenade.conf'")
+            print("Error reading value starting value. Try deleting 'epoch_grenade.conf'")
             exit()
 else:
     # creates config file and writes current epoch
@@ -35,7 +36,7 @@ else:
         file.write(str(epoch_time))
     start_time = epoch_time
 
-# just prints out the difference in epochs
+# just prints out the difference in epoch
 # TODO: write to raspi screen
 while True:
     epoch_time = int(t.time())
